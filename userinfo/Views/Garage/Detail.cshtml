@@ -1,11 +1,12 @@
-﻿@model GarageServiceLogViewModel
+﻿@using userinfo.ViewModels
+@model GarageServiceLogViewModel
 
             <div class="container">
                 <h1>Vehicle Details</h1>
                 <div class="card">
                     <div class="card-body">
                         <!-- Vehicle details go here -->
-            <p><strong>VIN:</strong> @Model.Vehicle</p>
+                        <p><strong>VIN:</strong> @Model.Vehicle.vin</p>
                         <p><strong>Make:</strong> @Model.Vehicle.Make</p>
                         <p><strong>Model:</strong> @Model.Vehicle.Model</p>
                         <!-- Add more details as needed -->
