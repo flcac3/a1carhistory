@@ -1,0 +1,46 @@
+﻿@model GarageServiceLogViewModel
+
+            <div class="container">
+                <h1>Vehicle Details</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Vehicle details go here -->
+            <p><strong>VIN:</strong> @Model.Vehicle</p>
+                        <p><strong>Make:</strong> @Model.Vehicle.Make</p>
+                        <p><strong>Model:</strong> @Model.Vehicle.Model</p>
+                        <!-- Add more details as needed -->
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-primary">Modify Details</button>
+                    <button class="btn btn-danger">Delete Vehicle</button>
+                </div>
+
+                <h2 class="mt-5">Service History</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Mileage In</th>
+                            <th>Mileage Out</th>
+                            <th>Service Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var log in Model.ServiceLogs)
+                        {
+                            <tr>
+                                <td>@log.date</td>
+                                <td>@log.mileageIn</td>
+                                <td>@log.mileageOut</td>
+                                <td>@log.serviceNotes</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "ServiceLogs", new { id = log.servicelogId })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Delete", "ServiceLogs", new { id = log.servicelogId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
