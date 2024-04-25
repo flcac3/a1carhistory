@@ -7,17 +7,25 @@
                     <div class="card-body">
                         <!-- Vehicle details go here -->
                         <p><strong>VIN:</strong> @Model.Vehicle.vin</p>
+            <p><strong>Nickname:</strong> @Model.Vehicle.nickname</p>
+            <p><strong>Purchase Date:</strong> @Model.Vehicle.purchaseDate</p>
+            <p><strong>Year:</strong> @Model.Vehicle.modelYear</p>
                         <p><strong>Make:</strong> @Model.Vehicle.Make</p>
                         <p><strong>Model:</strong> @Model.Vehicle.Model</p>
+            <p><strong>Trim:</strong> @Model.Vehicle.trim</p>
+            <p><strong>Number of Cylinders:</strong> @Model.Vehicle.engineCylinders </p>
+            <p><strong>Displacement:</strong> @Model.Vehicle.displacementL </p>
                         <!-- Add more details as needed -->
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button class="btn btn-primary">Modify Details</button>
-                    <button class="btn btn-danger">Delete Vehicle</button>
+        <a class="btn btn-danger" asp-controller="Garage" asp-action="Edit" asp-route-id="@Model.Vehicle.vehicleId">Edit</a>
+        <a asp-controller="Garage" asp-action="Delete" class="btn btn-primary">Delete Vehicle</a>
                 </div>
-
-                <h2 class="mt-5">Service History</h2>
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h2>Service History</h2>
+        <a asp-controller="ServiceLogs" asp-action="Create" asp-route-vehicleId="@Model.Vehicle.vehicleId" class="btn btn-primary">Add Service Log</a>
+    </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -37,7 +45,7 @@
                                 <td>@log.mileageOut</td>
                                 <td>@log.serviceNotes</td>
                                 <td>
-                                    <a href="@Url.Action("Edit", "ServiceLogs", new { id = log.servicelogId })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "ServiceLogs", new { id = log.servicelogId })" class="btn btn-danger">Edit</a>
                                     <a href="@Url.Action("Delete", "ServiceLogs", new { id = log.servicelogId })" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

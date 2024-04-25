@@ -45,27 +45,21 @@ namespace userinfo.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("carPhoto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("displacementL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("driveType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("engineCylinders")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("engineHP")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("modelYear")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nickname")
@@ -77,7 +71,6 @@ namespace userinfo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("trim")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("vin")

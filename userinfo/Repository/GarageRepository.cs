@@ -33,6 +33,10 @@ namespace userinfo.Repository
         {
             return await _context.Garages.FirstOrDefaultAsync(i => i.vehicleId == id);
         }
+        public async Task<Garage> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.Garages.AsNoTracking().FirstOrDefaultAsync(i => i.vehicleId == id);
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();
@@ -41,7 +45,8 @@ namespace userinfo.Repository
 
         public bool update(Garage garage)
         {
-            throw new NotImplementedException();
+            _context.Update(garage);
+            return Save();
         }
     }
 }

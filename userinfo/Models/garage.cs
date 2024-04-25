@@ -23,17 +23,17 @@ namespace userinfo.Models
         [Required]
         public string Model { set; get; } // Model
 
-        public string trim { get; set; } // Trim
+        public string? trim { get; set; } // Trim
 
-        public string modelYear { get; set; } // Model Year
+        public string? modelYear { get; set; } // Model Year
 
-        public string engineCylinders { get; set; } // Engine Cylinders
+        public string? engineCylinders { get; set; } // Engine Cylinders
 
-        public string displacementL { get; set; } // Displacement L
+        public string? displacementL { get; set; } // Displacement L
 
-        public string engineHP { get; set; } // Engine HP
+        public string? engineHP { get; set; } // Engine HP
 
-        public string driveType { get; set; } // Drive Type
+        public string? driveType { get; set; } // Drive Type
 
         [Required]
         public string Mileage { set; get; } // Mileage
@@ -44,6 +44,6 @@ namespace userinfo.Models
         [Required]
         public string nickname { set; get; } // Nickname
 
-        public string carPhoto { set; get; } // Car Photo
+        public string? carPhoto { set; get; } // Car Photo
     }
 }

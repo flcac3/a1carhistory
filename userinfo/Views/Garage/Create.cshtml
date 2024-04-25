@@ -1,0 +1,162 @@
+﻿@model Garage
+<div id="spinner" style="display: none;">
+    <img src="spinner.gif" alt="Loading..." />
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('button[type="submit"]').prop('disabled', true);
+        $('.form-group:not(:first)').hide();
+        $('#vin').change(function () {
+            var vin = $(this).val();
+            if (vin.length === 17) {
+            $('#spinner').show(); // Show the spinner
+            $.get('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/' + vin + '?format=json', function (data) {
+                    if (data.Results && data.Results.length > 0) {
+                        $('#Make').val(data.Results[7].Value);
+                $('#Model').val(data.Results[9].Value);
+                $('#modelYear').val(data.Results[10].Value);
+                $('#engineCylinders').val(data.Results[71].Value);
+                $('#displacementL').val(data.Results[74].Value);
+                $('#engineHP').val(data.Results[83].Value);
+                $('#driveType').val(data.Results[52].Value);
+                $('#trim').val(data.Results[13].Value);
+                $('#spinner').hide();
+                $('.form-group').show(); // Show all form groups
+                    // Enable the submit button if all fields are filled out
+                    $('button[type="submit"]').prop('disabled', !$('input').filter(function () {
+                        return $.trim(this.value).length === 0
+                    }).length);
+                } else {
+                    // Show an error message if the API did not return data
+                    alert('No data returned from the API. Please check the VIN number.');
+                            $('#spinner').hide(); // Hide the spinner
+                }
+                    }).fail(function () {
+                    $('#spinner').hide(); // Hide the spinner
+                });
+    } else {
+        // Show an error message if the VIN number is not of the correct length
+        alert('Please enter a valid VIN number.');
+    }
+            });
+
+        // When any input field changes
+        $('input').change(function () {
+            // If the field is empty
+            if (!$.trim(this.value).length) {
+                // Prompt the user to fill out the field
+                alert('Please fill out this field.');
+            }
+
+            // Enable the submit button if all fields are filled out
+            $('button[type="submit"]').prop('disabled', !$('input').filter(function () {
+                return $.trim(this.value).length === 0
+            }).length);
+        });
+    });
+</script>
+<head>
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+        }
+        .sub-heading {
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Add Vehicle</h2>
+    <h3 class="sub-heading">Enter the VIN number to auto-populate the fields below</h3>
+    <form method="post" asp-action="create">
+        <div class="form-group">
+            <label asp-for="vin">VIN</label>
+            <input asp-for="vin"  placeholder="Enter VIN Number" required>
+            <span asp-validation-for="vin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Make">Make</label>
+            <input asp-for="Make" placeholder="Enter Make">
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Model">Model</label>
+            <input asp-for="Model" placeholder="Enter Model">
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="trim">Trim</label>
+            <input asp-for="trim" placeholder="Enter Trim">
+            <span asp-validation-for="trim" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="modelYear">Model Year</label>
+            <input asp-for="modelYear" type="number" placeholder="Enter Year">
+            <span asp-validation-for="modelYear" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="engineCylinders">Engine Cylinders</label>
+            <input asp-for="engineCylinders" type="number" placeholder="Enter number of Cylinders">
+            <span asp-validation-for="engineCylinders" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="displacementL">Displacement L</label>
+            <input asp-for="displacementL" placeholder="Enter displacement in liters">
+            <span asp-validation-for="displacementL" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="engineHP">Engine HP</label>
+            <input asp-for="engineHP" type="number" placeholder="Enter HP">
+            <span asp-validation-for="engineHP" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="driveType">Drive Type</label>
+            <input asp-for="driveType" placeholder="Enter driveType">
+            <span asp-validation-for="driveType" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Mileage">Mileage</label>
+            <input asp-for="Mileage" required type="number" placeholder="Enter mileage">
+            <span asp-validation-for="Mileage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="purchaseDate">Purchase Date</label>
+            <input asp-for="purchaseDate" required type="date" placeholder="Enter purchase date">
+            <span asp-validation-for="purchaseDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="nickname">Nickname</label>
+            <input asp-for="nickname" required placeholder="Enter nickname">
+            <span asp-validation-for="nickname" class="text-danger"></span>
+        </div>
+
+        <button class="btn" type="submit">Add Vehicle</button>
+    </form>
+</body>

@@ -11,5 +11,6 @@ namespace userinfo.Interfaces
         bool update(Garage garage);
         bool delete(Garage garage);
         bool Save();
+        Task<Garage?> GetByIdAsyncNoTracking(int vehicleId);
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace userinfo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240423231706_5thCreate")]
-    partial class _5thCreate
+    [Migration("20240424233149_1st")]
+    partial class _1st
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,27 +48,21 @@ namespace userinfo.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("carPhoto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("displacementL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("driveType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("engineCylinders")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("engineHP")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("modelYear")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nickname")
@@ -80,7 +74,6 @@ namespace userinfo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("trim")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("vin")

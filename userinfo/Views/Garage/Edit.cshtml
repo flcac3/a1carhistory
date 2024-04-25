@@ -1,0 +1,80 @@
+﻿@using userinfo.ViewModels
+@model EditGarageViewModel
+
+
+    <form method="post" asp-action="edit" enctype="multipart/form-data">
+        <input type="hidden" value="vehicleId" id="vehicleId" />
+        <div class="form-group">
+            <label asp-for="vin">VIN</label>
+            <input asp-for="vin" placeholder="Enter VIN Number" required>
+            <span asp-validation-for="vin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Make">Make</label>
+            <input asp-for="Make" placeholder="Enter Make">
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Model">Model</label>
+            <input asp-for="Model" placeholder="Enter Model">
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="trim">Trim</label>
+            <input asp-for="trim" placeholder="Enter Trim">
+            <span asp-validation-for="trim" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="modelYear">Model Year</label>
+            <input asp-for="modelYear" type="number" placeholder="Enter Year">
+            <span asp-validation-for="modelYear" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="engineCylinders">Engine Cylinders</label>
+            <input asp-for="engineCylinders" type="number" placeholder="Enter number of Cylinders">
+            <span asp-validation-for="engineCylinders" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="displacementL">Displacement L</label>
+            <input asp-for="displacementL" placeholder="Enter displacement in liters">
+            <span asp-validation-for="displacementL" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="engineHP">Engine HP</label>
+            <input asp-for="engineHP" type="number" placeholder="Enter HP">
+            <span asp-validation-for="engineHP" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="driveType">Drive Type</label>
+            <input asp-for="driveType" placeholder="Enter driveType">
+            <span asp-validation-for="driveType" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Mileage">Mileage</label>
+            <input asp-for="Mileage" required type="number" placeholder="Enter mileage">
+            <span asp-validation-for="Mileage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="purchaseDate">Purchase Date</label>
+            <input asp-for="purchaseDate" required type="date" placeholder="Enter purchase date">
+            <span asp-validation-for="purchaseDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="nickname">Nickname</label>
+            <input asp-for="nickname" required placeholder="Enter nickname">
+            <span asp-validation-for="nickname" class="text-danger"></span>
+        </div>
+
+        <button class="btn" type="submit">Add Vehicle</button>
+    </form>
