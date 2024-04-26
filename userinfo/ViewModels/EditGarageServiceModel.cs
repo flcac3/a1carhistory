@@ -17,5 +17,6 @@ namespace userinfo.ViewModels
         public string Mileage { get; set; }
         public string nickname { get; set; }
         public string purchaseDate { get; set; }
+        public int servicelogId { get; set; } // Service Log ID
     }
 }

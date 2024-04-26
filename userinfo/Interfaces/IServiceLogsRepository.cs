@@ -5,7 +5,7 @@ namespace userinfo.Interfaces
     public interface IServiceLogsRepository
     {
         Task<IEnumerable<Servicelog>> GetAll();
-        Task<IEnumerable<Servicelog>> GetByIdAsync(int vehicleId);
+        Task<Servicelog> GetByIdAsync(int servicelogId);
         bool add(Servicelog garage);
         bool update(Servicelog garage);
         bool delete(Servicelog garage);

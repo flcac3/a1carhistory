@@ -29,14 +29,10 @@ namespace userinfo.Repository
             return await _context.Servicelogs.ToListAsync();
         }
 
-        public async Task<IEnumerable<Servicelog>> GetByIdAsync(int id)
+        public async Task<Servicelog> GetByIdAsync(int id)
         {
-            var garage = await _context.Servicelogs.FirstOrDefaultAsync(i => i.vehicleId == id);
-            if (garage == null)
-            {
-                throw new Exception($"No service log found with id {id}");
-            }
-            return (IEnumerable<Servicelog>)garage;
+            return await _context.Servicelogs.FirstOrDefaultAsync(i => i.servicelogId == id);
+
         }
         public bool Save()
         {
@@ -46,7 +42,8 @@ namespace userinfo.Repository
 
         public bool update(Servicelog servicelog)
         {
-            throw new NotImplementedException();
+            _context.Update(servicelog);
+            return Save();
         }
     }
 }

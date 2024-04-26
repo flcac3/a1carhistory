@@ -84,43 +84,45 @@ namespace userinfo.Controllers
                 ModelState.AddModelError("", "Failed to edit Vehicle");
                 return View("Edit", garageVM);
             }
-            var userVehicle = await _garageRepository.GetByIdAsyncNoTracking(id);
+            var userVehicle = await _garageRepository.GetByIdAsync(id);
 
             if (userVehicle == null)
             {
                 return View("Error");
             }
-            var vehicle = new Garage
-            {
-                   vehicleId = garageVM.vehicleId,
-                   vin = garageVM.vin,
-                   Make = garageVM.Make,
-                   Model = garageVM.Model,
-                   trim = garageVM.trim,
-                   modelYear = garageVM.modelYear,
-                   engineCylinders = garageVM.engineCylinders,
-                   displacementL = garageVM.displacementL,
-                   engineHP = garageVM.engineHP,
-                   driveType = garageVM.driveType,
-                   Mileage = garageVM.Mileage,
-                   nickname = garageVM.nickname,
-                   purchaseDate = garageVM.purchaseDate
-};
-            _garageRepository.update(vehicle);
+
+            // Update the properties of userVehicle with the values from garageVM
+            userVehicle.vin = garageVM.vin;
+            userVehicle.Make = garageVM.Make;
+            userVehicle.Model = garageVM.Model;
+            userVehicle.trim = garageVM.trim;
+            userVehicle.modelYear = garageVM.modelYear;
+            userVehicle.engineCylinders = garageVM.engineCylinders;
+            userVehicle.displacementL = garageVM.displacementL;
+            userVehicle.engineHP = garageVM.engineHP;
+            userVehicle.driveType = garageVM.driveType;
+            userVehicle.Mileage = garageVM.Mileage;
+            userVehicle.nickname = garageVM.nickname;
+            userVehicle.purchaseDate = garageVM.purchaseDate;
+
+            _garageRepository.update(userVehicle);
             return RedirectToAction("Index");
-                }
+        }
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var vehicle = await _garageRepository.GetByIdAsync(id);
+            var garage = await _garageRepository.GetByIdAsync(id);
+            if (garage == null) return View("Error");
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public async Task<IActionResult> Delete(Garage garage)
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteGarage(int id)
         {
+            var garage = await _garageRepository.GetByIdAsync(id);
+            if (garage == null) return View("Error");
             _garageRepository.delete(garage);
-
             return RedirectToAction("Index");
         }
-
     }
 }
