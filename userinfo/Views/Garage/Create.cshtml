@@ -5,7 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('button[type="submit"]').prop('disabled', true);
         $('.form-group:not(:first)').hide();
         $('#vin').change(function () {
             var vin = $(this).val();
@@ -23,10 +22,6 @@
                 $('#trim').val(data.Results[13].Value);
                 $('#spinner').hide();
                 $('.form-group').show(); // Show all form groups
-                    // Enable the submit button if all fields are filled out
-                    $('button[type="submit"]').prop('disabled', !$('input').filter(function () {
-                        return $.trim(this.value).length === 0
-                    }).length);
                 } else {
                     // Show an error message if the API did not return data
                     alert('No data returned from the API. Please check the VIN number.');
@@ -48,11 +43,6 @@
                 // Prompt the user to fill out the field
                 alert('Please fill out this field.');
             }
-
-            // Enable the submit button if all fields are filled out
-            $('button[type="submit"]').prop('disabled', !$('input').filter(function () {
-                return $.trim(this.value).length === 0
-            }).length);
         });
     });
 </script>
