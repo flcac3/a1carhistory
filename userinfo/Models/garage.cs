@@ -41,7 +41,8 @@ namespace userinfo.Models
 
         public string? carPhoto { set; get; } // Car Photo
         [ForeignKey("User")]
-        public string? UserId { get; set; }
+        [Required]
+        public string UserId { get; set; }
         public User User { get; set; }
     }
 }

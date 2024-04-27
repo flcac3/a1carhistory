@@ -29,6 +29,12 @@ namespace userinfo.Repository
         {
             return await _context.Garages.ToListAsync();
         }
+        public async Task<IEnumerable<Garage>> GetByUserIdAsync(string userId)
+        {
+            return await _context.Garages
+                .Where(g => g.UserId == userId)
+                .ToListAsync();
+        }
 
         public async Task<Garage> GetByIdAsync(int id)
         {

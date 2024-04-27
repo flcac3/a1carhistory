@@ -1,4 +1,4 @@
-﻿@model Garage
+﻿@model userinfo.ViewModels.CreateGarageViewModel
 <div id="spinner" style="display: none;">
     <img src="spinner.gif" alt="Loading..." />
 </div>
@@ -80,7 +80,7 @@
             <input asp-for="vin"  placeholder="Enter VIN Number" required>
             <span asp-validation-for="vin" class="text-danger"></span>
         </div>
-
+        <input type="hidden" asp-for="UserId" />
         <div class="form-group">
             <label asp-for="Make">Make</label>
             <input asp-for="Make" placeholder="Enter Make">

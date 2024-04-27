@@ -111,6 +111,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (User.Identity.IsAuthenticated)
+                        {
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -120,6 +122,13 @@
                                 <td>@item.Mileage</td>
                                 <td>@item.nickname</td>
                                 <td><a asp-controller="Garage" asp-action="Detail" asp-route-id="@item.vehicleId">View Details</a></td>
+                            </tr>
+                        }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6">Please log in to view your garage.</td>
                             </tr>
                         }
                     </tbody>

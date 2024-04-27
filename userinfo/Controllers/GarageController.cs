@@ -4,6 +4,10 @@ using userinfo.Models;
 using userinfo.ViewModels;
 using System.Linq;
 using userinfo.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using userinfo.Data;
 
 namespace userinfo.Controllers
 {
@@ -11,16 +15,21 @@ namespace userinfo.Controllers
     {
         private readonly IGarageRepository _garageRepository;
         private readonly IServiceLogsRepository _serviceLogsRepository;
+        private readonly UserManager<User> _userManager; // New field
+        private readonly AppDbContext _context;
 
-        public GarageController(IGarageRepository garageRepository, IServiceLogsRepository serviceLogRepository)
+        public GarageController(IGarageRepository garageRepository, IServiceLogsRepository serviceLogRepository, UserManager<User> userManager, AppDbContext context)
         {
             _garageRepository = garageRepository;
             _serviceLogsRepository = serviceLogRepository;
+            _userManager = userManager;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var garages = await _garageRepository.GetAll();
+            var userId = _userManager.GetUserId(User); // New line
+            var garages = await _garageRepository.GetByUserIdAsync(userId); // Modified line
             return View(garages);
         }
 
@@ -37,20 +46,44 @@ namespace userinfo.Controllers
 
             return View(viewModel);
         }
+        [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
-            return View();
+            var userId = _userManager.GetUserId(User);
+            var createGarageViewModel = new CreateGarageViewModel { UserId = userId };
+            return View(createGarageViewModel);
         }
-        [HttpPost]
-        public async Task<IActionResult> Create(Garage garage)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(garage);
-            }
-            _garageRepository.add(garage);
 
-            return RedirectToAction("Index");
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(CreateGarageViewModel garageVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = _userManager.GetUserId(User);
+                var garage = new Garage
+                {
+                    vin = garageVM.vin,
+                    Make = garageVM.Make,
+                    Model = garageVM.Model,
+                    trim = garageVM.trim,
+                    modelYear = garageVM.modelYear,
+                    engineCylinders = garageVM.engineCylinders,
+                    displacementL = garageVM.displacementL,
+                    engineHP = garageVM.engineHP,
+                    driveType = garageVM.driveType,
+                    Mileage = garageVM.Mileage,
+                    nickname = garageVM.nickname,
+                    purchaseDate = garageVM.purchaseDate,
+                    UserId = userId,
+                    vehicleId = garageVM.vehicleId
+                };
+
+                _garageRepository.add(garage);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(garageVM);
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

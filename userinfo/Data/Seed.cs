@@ -40,7 +40,6 @@ namespace userinfo.Data
                         new Garage()
                         {
                             vin = "1HGCM82633A123456",
-                            vehicleId = 1,
                             Make = "Honda",
                             Model = "Accord",
                             trim = "EX",
@@ -56,7 +55,6 @@ namespace userinfo.Data
                         new Garage()
                         {
                             vin = "1HGCM82633A123456",
-                            vehicleId = 2,
                             Make = "Honda",
                             Model = "Accord",
                             trim = "EX",
@@ -72,7 +70,6 @@ namespace userinfo.Data
                         new Garage()
                         {
                             vin = "1HGCM82633A123456",
-                            vehicleId = 3,
                             Make = "Honda",
                             Model = "Accord",
                             trim = "EX",
