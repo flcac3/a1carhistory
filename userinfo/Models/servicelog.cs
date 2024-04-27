@@ -7,8 +7,6 @@ namespace userinfo.Models
     public class Servicelog
     {
         [Key]
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int servicelogId { get; set; } // Service Log ID
 
         [Required]
@@ -24,6 +22,9 @@ namespace userinfo.Models
 
         [ForeignKey("vehicle")]
         public int vehicleId { get; set; } // Vehicle ID
+        [ForeignKey("User")]
+        public string? UserId { get; set; }
+        public User User { get; set; }
 
     }
 }

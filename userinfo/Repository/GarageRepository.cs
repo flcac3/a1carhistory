@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using userinfo.Data;
 using userinfo.Interfaces;
 using userinfo.Models;
 

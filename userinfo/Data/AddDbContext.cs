@@ -1,11 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using userinfo.Models;
 
-public class AppDbContext : DbContext
+namespace userinfo.Data
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    { }
-    public DbSet<Garage> Garages { get; set; }
-    public DbSet<Servicelog> Servicelogs { get; set; }
+    public class AppDbContext : IdentityDbContext<User>
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        { }
+
+        public DbSet<Garage> Garages { get; set; }
+        public DbSet<Servicelog> Servicelogs { get; set; }
+    }
 }

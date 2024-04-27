@@ -1,18 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace userinfo.Models
 {
     public class Garage
     {
         [Key]
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int vehicleId { set; get; }
-
-        [Required]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
 
         [Required]
         public string vin { get; set; } // VIN
@@ -45,5 +40,8 @@ namespace userinfo.Models
         public string nickname { set; get; } // Nickname
 
         public string? carPhoto { set; get; } // Car Photo
+        [ForeignKey("User")]
+        public string? UserId { get; set; }
+        public User User { get; set; }
     }
 }
