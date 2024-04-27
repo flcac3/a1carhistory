@@ -19,7 +19,7 @@ namespace userinfo.Controllers
             _serviceLogsRepository = serviceLogRepository;
             _garageRepository = garageRepository;
         }
-
+        [HttpGet]
         public IActionResult Create(int vehicleId)
         {
             ViewBag.VehicleId = vehicleId;
@@ -27,16 +27,17 @@ namespace userinfo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Servicelog servicelog)
+        public async Task<IActionResult> Create(Servicelog servicelog, int vehicleId)
         {
             if (!ModelState.IsValid)
             {
                 return View(servicelog);
             }
+            servicelog.vehicleId = vehicleId;
             _serviceLogsRepository.add(servicelog);
 
             // Assuming that your vehicle details action is named "Details" and is in a controller named "Vehicles"
-            return RedirectToAction("Detail", "Garage", new { id = servicelog.vehicleId});
+            return RedirectToAction("Detail", "Garage", new { id = servicelog.vehicleId });
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

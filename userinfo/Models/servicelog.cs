@@ -22,9 +22,6 @@ namespace userinfo.Models
 
         [ForeignKey("vehicle")]
         public int vehicleId { get; set; } // Vehicle ID
-        [ForeignKey("User")]
-        public string? UserId { get; set; }
-        public User User { get; set; }
 
     }
 }
